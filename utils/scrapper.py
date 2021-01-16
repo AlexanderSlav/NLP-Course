@@ -8,9 +8,6 @@ from tqdm import tqdm
 
 logging.basicConfig(level=logging.INFO)
 
-
-driver_path = "/home/alexander/Downloads/chromedriver"
-
 CATEGORIES_IDXS = [8, 5, 9, 13]
 
 
@@ -30,7 +27,7 @@ class NewsCrawler:
             executable_path=driver_path,
             options=chrome_options,
         )
-        self.save_steps = [50, 100, 150, 200]
+        self.save_steps = [100, 500, 1000, 2000, 3000]
 
     def __call__(self, link):
         self.wd.get(link)
@@ -152,8 +149,3 @@ class NewsCrawler:
 
     def close(self):
         self.wd.close()
-
-
-scrapper = NewsCrawler(driver_path=driver_path, headless=False)
-scrapper("http://txt.newsru.com")
-scrapper.close()

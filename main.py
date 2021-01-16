@@ -32,6 +32,7 @@ if __name__ == "__main__":
     scrapper = NewsCrawler(
         driver_path=args.driver_path,
         headless=args.headless,
+        articles_desired_amount=args.articles_amount,
     )
     scrapper("http://txt.newsru.com")
     scrapper.close()
