@@ -27,7 +27,7 @@ class NewsCrawler:
             executable_path=driver_path,
             options=chrome_options,
         )
-        self.save_steps = [10, 100, 500, 1000, 2000, 3000]
+        self.save_steps = [100, 500, 1000, 2000, 3000]
 
     def __call__(self, link):
         self.wd.get(link)
@@ -121,16 +121,18 @@ class NewsCrawler:
                         added_articles_amount += 1
                     else:
                         logging.info("Duplicate appending!")
-                    print("\n Running dataset size:", dataset.size)
                     del article
+                    print("\n Running dataset size:", dataset.size)
+                    if dataset.size in self.save_steps:
+                        logging.info("Saving dataset\n")
+                        path = (
+                            f"./datasets/{dataset.size}_articles_dataset.json"
+                        )
+                        dataset.save(path=path)
+
                     self.wd.back()
                     if added_articles_amount >= self.articles_desired_amount:
                         break
-
-                if dataset.size in self.save_steps:
-                    logging.info("Saving dataset\n")
-                    path = f"./datasets/{dataset.size}_articles_dataset.json"
-                    dataset.save(path=path)
 
                 if watched_articles_amount == articles_amount_by_page:
                     watched_articles_amount = 0
