@@ -49,7 +49,9 @@ class NewsCrawler:
                 )
                 category_ref.find_element_by_tag_name("a").click()
             except:
-                print("Something wrong")
+                time.sleep(2)
+                category_ref.find_element_by_tag_name("a").click()
+
             added_articles_amount = 0
             watched_articles_amount = 0
             while added_articles_amount < self.articles_desired_amount:
@@ -119,16 +121,18 @@ class NewsCrawler:
                         added_articles_amount += 1
                     else:
                         logging.info("Duplicate appending!")
-                    print("\n Running dataset size:", dataset.size)
                     del article
+                    print("\n Running dataset size:", dataset.size)
+                    if dataset.size in self.save_steps:
+                        logging.info("Saving dataset\n")
+                        path = (
+                            f"./datasets/{dataset.size}_articles_dataset.json"
+                        )
+                        dataset.save(path=path)
+
                     self.wd.back()
                     if added_articles_amount >= self.articles_desired_amount:
                         break
-
-                if dataset.size in self.save_steps:
-                    logging.info("Saving dataset\n")
-                    path = f"../datasets/{dataset.size}_articles_dataset.json"
-                    dataset.save(path=path)
 
                 if watched_articles_amount == articles_amount_by_page:
                     watched_articles_amount = 0

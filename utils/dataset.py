@@ -12,7 +12,7 @@ class NewsTextDataset:
         if article.article_id not in self.unique_ids:
             self.unique_ids.append(article.article_id)
             self.data.append(article)
-            self.size = len(self.data)
+            self.size +=1
             return True
         else:
             return False
@@ -29,6 +29,3 @@ class NewsTextDataset:
 
     def __len__(self):
         return len(self.data)
-
-    def is_article_id_in_data(self, id):
-        return
