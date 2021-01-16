@@ -1,5 +1,5 @@
 # newspaper-scraping
-This script scrapping news data from http://txt.newsru.com
+This script scraping news data from http://txt.newsru.com
 
 ![](demo.gif)
 ## Installation
