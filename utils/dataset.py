@@ -12,15 +12,18 @@ class NewsTextDataset:
         if article.article_id not in self.unique_ids:
             self.unique_ids.append(article.article_id)
             self.data.append(article)
-            self.size +=1
+            self.size += 1
             return True
         else:
             return False
 
     def save(self, path):
         with open(path, "w") as fp:
+            data = {
+                "catalog": [ob.__dict__ for ob in self.data],
+            }
             json.dump(
-                [ob.__dict__ for ob in self.data],
+                data,
                 fp,
                 sort_keys=True,
                 indent=4,

@@ -110,7 +110,7 @@ class NewsCrawler:
                                 "article-tags-list",
                             )[1].find_elements_by_tag_name("a")[1:]
                         ),
-                    ]
+                    ]  # TODO make a str not a list
                     article = Article()
                     article.set_article_id(link)
                     article.set_category(category)
