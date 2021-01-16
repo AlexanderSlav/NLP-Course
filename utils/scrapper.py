@@ -27,7 +27,7 @@ class NewsCrawler:
             executable_path=driver_path,
             options=chrome_options,
         )
-        self.save_steps = [100, 500, 1000, 2000, 3000]
+        self.save_steps = [10, 100, 500, 1000, 2000, 3000]
 
     def __call__(self, link):
         self.wd.get(link)
@@ -49,7 +49,9 @@ class NewsCrawler:
                 )
                 category_ref.find_element_by_tag_name("a").click()
             except:
-                print("Something wrong")
+                time.sleep(2)
+                category_ref.find_element_by_tag_name("a").click()
+
             added_articles_amount = 0
             watched_articles_amount = 0
             while added_articles_amount < self.articles_desired_amount:
@@ -127,7 +129,7 @@ class NewsCrawler:
 
                 if dataset.size in self.save_steps:
                     logging.info("Saving dataset\n")
-                    path = f"../datasets/{dataset.size}_articles_dataset.json"
+                    path = f"./datasets/{dataset.size}_articles_dataset.json"
                     dataset.save(path=path)
 
                 if watched_articles_amount == articles_amount_by_page:

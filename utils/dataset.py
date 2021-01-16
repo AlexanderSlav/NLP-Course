@@ -29,6 +29,3 @@ class NewsTextDataset:
 
     def __len__(self):
         return len(self.data)
-
-    def is_article_id_in_data(self, id):
-        return
