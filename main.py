@@ -9,18 +9,21 @@ def parse_args() -> argparse.Namespace:
         "--driver_path",
         type=str,
         default="/home/alexander/Downloads/chromedriver",
+        help="Path to chromedriver for selenium",
     )
     parser.add_argument(
         "-head",
         "--headless",
         type=bool,
         default=False,
+        help="If true scrapping will be  processed without visualization",
     )
     parser.add_argument(
         "-art_num",
         "--articles_amount",
         type=int,
         default=1000,
+        help="The desired amount of articles by category",
     )
 
     # TODO add categories ids as a parameter
