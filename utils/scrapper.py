@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 logging.basicConfig(level=logging.INFO)
 
-CATEGORIES_IDXS = [8, 5, 9, 13]
+CATEGORIES_IDXS = [5, 9, 13]
 
 
 class NewsCrawler:
@@ -102,21 +102,25 @@ class NewsCrawler:
                         "body > table > tbody > tr:nth-child(3) > "
                         "td.content-column > div.article > div.article-text",
                     ).text
-
-                    current_tags = [
-                        ",".join(
-                            tag.text
-                            for tag in self.wd.find_elements_by_class_name(
-                                "article-tags-list",
-                            )[1].find_elements_by_tag_name("a")[1:]
-                        ),
-                    ]  # TODO make a str not a list
+                    try:
+                        tags = (
+                            ",".join(
+                                tag.text
+                                for tag in self.wd.find_elements_by_class_name(
+                                    "article-tags-list",
+                                )[1].find_elements_by_tag_name("a")[1:]
+                            ),
+                        )
+                        # TODO make a str not a list
+                    except:
+                        logging.warning(f"There are no tags for {link}")
+                        tags = None
                     article = Article()
                     article.set_article_id(link)
                     article.set_category(category)
                     article.set_title(title)
                     article.set_text(text)
-                    article.set_tags(current_tags)
+                    article.set_tags(tags)
                     if dataset.append(article):
                         added_articles_amount += 1
                     else:
@@ -149,7 +153,7 @@ class NewsCrawler:
         )
         logging.info("Saving dataset\n")
 
-        dataset.save(path="../final_dataset.json")
+        dataset.save(path="./datasets/final_dataset.json")
 
     def close(self):
         self.wd.close()
