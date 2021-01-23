@@ -1,28 +1,27 @@
-# newspaper-scraping[russian]
+# NLP Course
+<p align="center">
+  <img src="https://miro.medium.com/max/3200/1*HpKh-MGZIq-GyRAiqEUnSw.png" />
+</p>
 
-This script is scraping news data from http://txt.newsru.com
+## Table of content
 
-![](demo.gif)
+- [Installation](#installation)
+    - [Setup repository requirements](#setup-repository-requirements)
+    - [Setup nlp_utils library ](#setup-nlp_utils-library)
+- [Content list](#content-list)
+
+
 ## Installation
 
+### Setup repository requirements
 Setup the environment  `pip install -r requirements-dev.txt`
 
-## Usage
+### Setup nlp_utils library
+Setup `nlp_utils` library `python setup_utils.py develop`
 
-```
-usage: main.py [-h] [-dr_pth DRIVER_PATH] [-head HEADLESS]
-               [-art_num ARTICLES_AMOUNT]
+## Content list
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -dr_pth DRIVER_PATH, --driver_path DRIVER_PATH
-                        Path to chromedriver for selenium
-  -head HEADLESS, --headless HEADLESS
-                        If true scrapping will be processed without
-                        visualization
-  -art_num ARTICLES_AMOUNT, --articles_amount ARTICLES_AMOUNT
-                        The desired amount of articles by category
-
-
-
-```
+| Lab Name                   | Link                                              | Demo                                                    |
+| ----------------------------- | ------------------------------------------------- | ------------------------------------------------------- |
+| 1. Newspaper Scrapper | [:radio_button:](./1_Newspaper_Scrapper) | <details> ![](./1_Newspaper_Scrapper/demo.gif) |
+| 2. Text Classification   | [:radio_button:](./2_Text_Classification)    | <details> ![]()    |
