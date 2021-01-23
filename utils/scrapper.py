@@ -126,11 +126,11 @@ class NewsCrawler:
                     else:
                         logging.info("Duplicate appending!")
                     del article
-                    print("\n Running dataset size:", dataset.size)
-                    if dataset.size in self.save_steps:
+                    print("\n Running dataset size:", len(dataset))
+                    if len(dataset) in self.save_steps:
                         logging.info("Saving dataset\n")
                         path = (
-                            f"./datasets/{dataset.size}_articles_dataset.json"
+                            f"./datasets/{len(dataset)}_articles_dataset.json"
                         )
                         dataset.save(path=path)
 

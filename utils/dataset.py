@@ -6,13 +6,11 @@ class NewsTextDataset:
     def __init__(self):
         self.data = []
         self.unique_ids = []
-        self.size = len(self.data)
 
     def append(self, article: Article):
         if article.article_id not in self.unique_ids:
             self.unique_ids.append(article.article_id)
             self.data.append(article)
-            self.size += 1
             return True
         else:
             return False
