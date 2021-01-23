@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 logging.basicConfig(level=logging.INFO)
 
-CATEGORIES_IDXS = [5, 9, 13]
+CATEGORIES_IDXS = [8, 5, 9, 13]
 
 
 class NewsCrawler:
