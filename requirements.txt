@@ -1,2 +1,1 @@
-selenium
-tqdm
+tqdm==4.56.0
