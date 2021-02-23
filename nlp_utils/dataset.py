@@ -19,14 +19,6 @@ class NewsTextDataset:
         self.unique_ids = []
         self.mystem = Mystem()
         self.russian_stopwords = stopwords.words("russian")
-        self.emoji_pattern = re.compile(
-            "["
-            "\U0001F600-\U0001F64F"  # emoticons
-            "\U0001F300-\U0001F5FF"  # symbols & pictographs
-            "\U0001F680-\U0001F6FF"  # transport & map symbols
-            "\U0001F1E0-\U0001F1FF"  # flags (iOS)
-            "]+",
-        )
 
     def append(self, article: Article):
         if article.article_id not in self.unique_ids:
@@ -56,9 +48,9 @@ class NewsTextDataset:
 
     def preprocess(self):
         for idx, article in tqdm(enumerate(self.data)):
-            # remove english text, dollar sign, and brackets
-            text = re.sub(r"[a-zA-Z]|\$|\d*|\(|\)|/@", u"", article.text)
-            text = self.emoji_pattern.sub(u"", text)
+            # r"[a-zA-Z]|\$|\d*|\(|\)|/@"
+            pattern = r"[^а-яА-Я\s]"
+            text = re.sub(pattern, "", article.text)
             tokens = self.mystem.lemmatize(text.lower())
             tokens = [
                 token
